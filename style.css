@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Monda:wght@400;700&family=Press+Start+2P&display=swap');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #ffdeb5, #ffcea5);
+    font-family: 'Monda', sans-serif;
+    /* background-repeat: no-repeat; */
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.main-bg {
+    background: url(https://i.ibb.co/sHgK4TG/ring.gif) no-repeat;
+    background-size: cover;
+    display: flex;
+    background-position: center;
+    /* height: calc(100vh - 365px); */
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    justify-content: space-between;
+
+}
+
+.main-title {
+    height: auto;
+    max-width: 500px;
+    width: 100%;
+}
+
+.main-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 15px;
+}
+
+.ring {
+    display: flex;
+    align-items: self-end;
+    justify-content: center;
+
+}
+
+.main-msg {
+    background: #bc1340;
+    padding: 10px;
+    text-align: center;
+    color: #FFF;
+    font-size: 18px;
+
+}
+
+.combo-btn {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 15px;
+    position: relative;
+
+}
+
+.items {
+    display: flex;
+    width: 100%;
+    grid-gap: 15px
+}
+
+.trigger {
+    cursor: pointer;
+    background: linear-gradient(180deg, #ffefbd, #ffa67b);
+    padding: 8px 30px;
+    border-bottom: 5px solid #d66554;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+    outline: 1px solid;
+    font-weight: 700;
+    color: #a72e2f;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all 0.23s ease;
+
+}
+
+.trigger span {
+    display: flex;
+    background: #ffad84;
+    border-radius: 10px;
+    width: 100%;
+    color: #791223;
+    justify-content: center;
+}
+
+
+.trigger:hover {
+    background: linear-gradient(180deg, #ffdeb5, #ffad84);
+    color: #bc1340;
+
+}
+
+.log-btn:active,
+.multi-btn:active,
+.trigger:active,
+.submit-btn:active {
+    transform: translateY(5px);
+    border-bottom: 2px;
+}
+
+.main-inner {
+    max-width: 1157px;
+    margin: auto;
+    padding: 15px;
+}
+
+.submit-btn {
+    background: linear-gradient(180deg, #fc7065, #e75d52);
+    padding: 18px 30px;
+    color: #ffefbd;
+    outline: 1px solid;
+    border-bottom: 5px solid #a72e2f;
+    color: #FFF
+}
+
+.submit-btn:hover {
+    background: linear-gradient(180deg, #e75d52, #cd524e) !important;
+    color: #ffefbd;
+}
+
+.times {
+    display: flex;
+    width: 100%;
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.multi-btn {
+    background: linear-gradient(180deg, #fc7065, #d8524a);
+    color: #f4f2ed;
+    font-weight: 700;
+    font-size: 30px;
+    border-radius: 50px;
+    display: inline-block;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.23s ease;
+
+}
+
+.multi-btn:hover {
+    background: linear-gradient(180deg, #fc7065, #a72e2f);
+    color: #ffefbd;
+}
+
+.box {
+    height: 323px;
+    object-fit: cover;
+    width: 210px;
+
+}
+
+.box2 {
+    height: auto;
+    object-fit: contain;
+    max-width: 324px;
+    width: 100%;
+}
+
+.log-btn {
+    color: #FFF;
+    background: linear-gradient(180deg, #fc7065, #e75d52);
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px 15px;
+    display: flex;
+    font-weight: 700;
+    grid-gap: 5px;
+    cursor: pointer;
+
+    height: min-content;
+
+
+}
+
+.log-btn:hover {
+    cursor: pointer;
+}
+
+.eth-balance {
+    color: #FFF;
+    background: linear-gradient(180deg, #fc7065, #e75d52);
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px 15px;
+    display: flex;
+    font-weight: 700;
+    grid-gap: 5px;
+    cursor: pointer;
+    height: min-content;
+
+}
+
+.eth-balance span {
+    background: #FFF;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 700;
+    color: #c51342;
+    min-width: 53px;
+}
+
+#eth-balance{
+    padding: 0 15px;;
+}
+
+#prize-pool {
+    padding: 0 15px;
+}
+
+.prize {
+    border: 14px dotted yellow;
+    border-radius: 10px;
+    color: #FFF;
+    font-weight: 400;
+    text-align: center;
+    font-size: 20px;
+    padding: 5px;
+    animation: blink 2s infinite;
+}
+
+.prize span {
+    font-size: 3vw;
+    color: yellow;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.log .inner {
+    cursor: pointer;
+    background: linear-gradient(180deg, #ffefbd, #ffcea5);
+    padding: 18px 30px;
+    border-bottom: 5px solid #ffd9ab;
+    max-width: 541px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    font-size: 25px;
+    top: 56px;
+    margin: auto;
+    outline: 2px solid;
+    font-weight: 700;
+    color: #a72e2f;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all 0.23s ease;
+
+}
+
+.log {
+    top: 0;
+    right: 0;
+    left: 0;
+    content: " ";
+    background: rgba(0, 0, 0, 0.47);
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 1;
+
+}
+
+.log .list {
+    font-size: 20px;
+    color: #5c2525;
+    width: 95%;
+    padding: 5px 19px;
+    text-align: center;
+    border-top: 1px solid #edbe8b;
+}
+
+span.close {
+    position: absolute;
+    right: 23px;
+    top: 8px;
+
+}
+
+.hidden {
+    display: none;
+}
+
+
+.log .head {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.log-sum {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.log-sum span {
+    color: #5c2525
+}
+
+@keyframes blink {
+    0% {
+
+        border-color: yellow;
+    }
+
+    100% {
+
+        border-color: #FFF;
+    }
+}
+
+@media (max-width: 992px) {
+    .prize span {
+        font-size: 5vw;
+    }
+
+    .box {
+        height: 323px;
+        object-fit: contain;
+        width: 208px;
+    }
+}
+
+@media (max-width: 700px) {
+    .trigger {
+        padding: 8px 10px;
+    }
+
+    .box {
+        height: 323px;
+        object-fit: contain;
+        width: 208px;
+    }
+}
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Boxing Bonanza | Online betting Game</title>
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta name="x-apple-disable-message-reformatting">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="telephone=no" name="format-detection">
+	<link rel="stylesheet" href="./style.css"></link>
+	<script src="https://cdn.ethers.io/scripts/ethers-v4.min.js" charset="utf-8" type="text/javascript"></script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="main-bg">
+			<div class="main-info">
+				<a class="log-btn" onclick="loadLog(this)">
+					<img
+						src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAbUlEQVR4nO3UOw6AIBCEYSqvLl7LvYqPY/yGSLVSaFis5isJyYRhsymJSDRgAhbgAHYglzN3x+hjreAS5OXg4LUVXF7qneHVerVeb0uj0a567qza3g5Xri+PGq7nn4r8Bq3Mm1am8Y1Wpkga7gLGJeiJ1NdCXAAAAABJRU5ErkJggg==">
+					Log
+				</a>
+				<div class="prize">PRIZEPOOL<br><span id="prize-pool">0 MATIC</span></div>
+				<div class="eth-balance">MATIC: <span id="eth-balance">0.00</span></div>
+			</div>
+			<img class="main-title" src="https://i.ibb.co/JKs73K9/title.png" alt="title" border="0">
+
+			<div class="ring">
+				<img id="red-animation" class="box" src="https://i.ibb.co/C2TwJpW/boxer1.gif" alt="boxer1" border="0">
+				<img id="engage-animation" class="box2 hidden" src="https://i.ibb.co/9c74hBW/boxer-brawl.gif" alt="boxer-brawl" border="0">
+				<img id="blue-animation" class="box" src="https://i.ibb.co/Qr5dC2X/boxer2.gif" alt="boxer2" border="0">
+			</div>
+		</div>
+		<div class="log hidden">
+			<div class="inner">
+				<span class="close" onclick="loadLog(this)">X</span>
+				<div class="head">Match result</div>
+				<div class="list blue" style="color: black;">Winner: <span id="winner-result">--<span></div>
+				<div class="list red " style="color: red; font-size: 3rem;"> <span id="bet-result">Place bet</span></div>
+				<div class="log-sum">
+					<div style="color: red;">RED<br><span id="red-stats">40%</span></div>
+					<div style="color: black;">DRAW<br><span id="draw-stats">30%</span></div>
+					<div style="color: blue;">BLUE<br><span id="blue-stats">30%</span></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="main-msg">
+
+			<span id="announcement">Place your bet!</span>
+		</div>
+		<div class="main-inner">
+			<div class="combo-btn">
+				<div class="times">
+					<a id="multiplier-one" class="multi-btn" onclick="multiplierOne()">1X</a>
+					<a id="multiplier-two" class="multi-btn" onclick="multiplierTwo()">0.1X</a>
+					<a id="multiplier-three" class="multi-btn" onclick="multiplierThree()">0.01X</a>
+				</div>
+				<div class="items">
+					<a class="trigger" onclick="selectRed()">Red<br><span id="red" class="red">0</span></a>
+					<a class="trigger" onclick="selectDraw()">Draw<br><span id="draw" class="draw">0</span></a>
+					<a class="trigger" onclick="selectBlue()">Blue<br><span id="blue" class="blue">0</span></a>
+				</div>
+				<a class="trigger submit-btn" onclick="placeBet()">Start!</a>
+
+			</div>
+		</div>
+
+	</div>
+
+</body>
+<script>
+	function loadLog() {
+		document.querySelector('.log').classList.toggle('hidden');
+	}
+</script>
+<script src="./app.js"></script>
+
+</html>Boxing Bonanza @ onecodecamp 
