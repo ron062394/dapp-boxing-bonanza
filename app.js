@@ -1,9 +1,10 @@
 let choice;
 let multiplier = 0;
 let betAmount = 0;
+let togleOn = false;
 
 
-const ContractAddress = "0xf504e4A12FF97e9697a393A3d9691070e1d92af0";
+const ContractAddress = "0x1723438f3d69E03785982D2f97dDd95c3EB80187";
 const ContractABI = [
 	{
 		"inputs": [],
@@ -20,7 +21,7 @@ const ContractABI = [
 				"type": "uint256"
 			}
 		],
-		"name": "PlaceBetRequest",
+		"name": "GameID",
 		"type": "event"
 	},
 	{
@@ -45,7 +46,7 @@ const ContractABI = [
 				"type": "bool"
 			}
 		],
-		"name": "PlaceBetResult",
+		"name": "GameResult",
 		"type": "event"
 	},
 	{
@@ -112,13 +113,13 @@ const ContractABI = [
 						"type": "bool"
 					},
 					{
-						"internalType": "enum BettingGame.BetSelection",
+						"internalType": "enum BoxingBonanza.PlayerChoice",
 						"name": "choice",
 						"type": "uint8"
 					},
 					{
 						"internalType": "uint256",
-						"name": "betAmount",
+						"name": "entryFee",
 						"type": "uint256"
 					},
 					{
@@ -127,7 +128,7 @@ const ContractABI = [
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct BettingGame.PlaceBetStatus",
+				"internalType": "struct BoxingBonanza.GameStatus",
 				"name": "",
 				"type": "tuple"
 			}
@@ -157,7 +158,7 @@ const ContractABI = [
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct BettingGame.WinStats",
+				"internalType": "struct BoxingBonanza.WinStats",
 				"name": "",
 				"type": "tuple"
 			}
@@ -168,49 +169,12 @@ const ContractABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "enum BettingGame.BetSelection",
-				"name": "choice",
-				"type": "uint8"
-			}
-		],
-		"name": "placeBet",
-		"outputs": [
-			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_requestId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256[]",
-				"name": "_randomWords",
-				"type": "uint256[]"
-			}
-		],
-		"name": "rawFulfillRandomWords",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "statuses",
+		"name": "matches",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -238,13 +202,13 @@ const ContractABI = [
 				"type": "bool"
 			},
 			{
-				"internalType": "enum BettingGame.BetSelection",
+				"internalType": "enum BoxingBonanza.PlayerChoice",
 				"name": "choice",
 				"type": "uint8"
 			},
 			{
 				"internalType": "uint256",
-				"name": "betAmount",
+				"name": "entryFee",
 				"type": "uint256"
 			},
 			{
@@ -254,6 +218,43 @@ const ContractABI = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_requestId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_randomWords",
+				"type": "uint256[]"
+			}
+		],
+		"name": "rawFulfillRandomWords",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "enum BoxingBonanza.PlayerChoice",
+				"name": "choice",
+				"type": "uint8"
+			}
+		],
+		"name": "startGame",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -325,10 +326,13 @@ async function getProviderOrSigner() {
 				ContractABI,
 				signer
 			);
-			MyContract.on("PlaceBetResult", (player, requestId, didWin) => {
+			MyContract.on("GameResult", (player, requestId, didWin) => {
 				handleResult(player, requestId).then(() => {
+					if (togleOn == true) {
 					var logBtn = document.querySelector('.log-btn');
 					logBtn.click();
+					}
+					togleOn = false;
 				})
             });
 		});
@@ -366,7 +370,7 @@ async function placeBet() {
 		let blue = document.getElementById("blue-animation");
 		try {
 			const msgValue = ethers.utils.parseEther(`${betAmount}`);
-			var requestId = await MyContract.placeBet(choice, { value: msgValue, gasLimit: 500000 });
+			var requestId = await MyContract.startGame(choice, { value: msgValue, gasLimit: 500000 });
 			red.style.display = 'none';
 			blue.style.display = 'none';
 			engage.style.display = 'block';				
@@ -394,9 +398,8 @@ async function handleResult(address, requestId) {
 	const currentAddress = await signer.getAddress();
 	let result = await MyContract.getStatus(requestId);
 	if (currentAddress === result[2]) {
-		updateAnimation()
-		console.log('Your bet: ' + result[5])
-		console.log('result: ' + ethers.utils.formatEther(result[7]) * 10 ** 18)
+		updateAnimation();
+		togleOn = true;
 		let winningResult = await ethers.utils.formatEther(result[7]) * 10 ** 18
 		let playerChoice = await result[5]
 		document.getElementById("announcement").innerText = "Place your bet!";
@@ -484,5 +487,3 @@ const selectBlue = function() {
 		document.getElementById("blue").innerText = betAmount.toFixed(2);
 	}
 }
-
-
